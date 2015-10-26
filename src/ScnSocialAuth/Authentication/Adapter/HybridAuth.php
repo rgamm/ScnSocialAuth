@@ -440,8 +440,19 @@ class HybridAuth extends AbstractAdapter implements ServiceManagerAwareInterface
 
     protected function twitterToLocalUser($userProfile)
     {
+        if (!isset($userProfile->email) || empty($userProfile->email)) {
+            throw new Exception\RuntimeException(
+                'Please set and verify your email with Twitter before attempting login',
+                Result::FAILURE_CREDENTIAL_INVALID
+            );
+        }
+        $mapper = $this->getZfcUserMapper();
+        if (false != ($localUser = $mapper->findByEmail($userProfile->email))) {
+            return $localUser;
+        }
         $localUser = $this->instantiateLocalUser();
         $localUser->setUsername($userProfile->displayName)
+            ->setEmail($userProfile->email)
             ->setDisplayName($userProfile->firstName)
             ->setPassword(__FUNCTION__);
         $result = $this->insert($localUser, 'twitter', $userProfile);
