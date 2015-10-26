@@ -100,6 +100,7 @@ class HybridAuthFactory implements FactoryInterface
                             'key' => $options->getTwitterConsumerKey(),
                             'secret' => $options->getTwitterConsumerSecret(),
                         ),
+                        'includeEmail' => true//$options->getTwitterIncludeEmail()
                     ),
                     'Yahoo' => array(
                         'enabled' => $options->getYahooEnabled(),

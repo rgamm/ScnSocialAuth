@@ -156,6 +156,11 @@ class ModuleOptions extends AbstractOptions
     /**
      * @var boolean
      */
+    protected $twitterIncludeEmail;
+
+    /**
+     * @var boolean
+     */
     protected $yahooEnabled = false;
 
     /**
@@ -885,6 +890,19 @@ class ModuleOptions extends AbstractOptions
     public function getTwitterConsumerSecret()
     {
         return $this->twitterConsumerSecret;
+    }
+
+    public function setTwitterIncludeEmail($twitterIncludeEmail)
+    {
+        $this->twitterIncludeEmail = (boolean) $twitterIncludeEmail;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getTwitterIncludeEmail()
+    {
+        return $this->twitterIncludeEmail;
     }
 
     /**
